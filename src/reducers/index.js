@@ -7,13 +7,13 @@ const songState = () => {
   ];
 };
 
-const songReducers = (preReducer = null, action) => {
+const songReducers = (songState = null, action) => {
   if (action.type === "SONG_ACTION") {
-    console.log("action.type.payload");
-    return action.type.payload;
+    console.log("actio.payload");
+    return null;
   }
 
-  return preReducer;
+  return songState;
 };
 
 export default combineReducers({

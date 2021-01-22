@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { render } from "react-dom";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { songAction } from "./actions";
 
 const SongList = (props) => {
-  const [data, setData] = useState(props.name);
-
   const final = () => {
-    return data.map((info) => {
+    return props.name.map((info) => {
       return (
-        <div>
+        <div key={info.name}>
           <h1>hope it will work</h1>
-          <p>{info.name}</p>
+          <p onClick={() => props.songAction(info)}>{info.name}</p>
         </div>
       );
     });
@@ -21,16 +21,18 @@ const SongList = (props) => {
       <h1>Hello how are you</h1>
       <button>click Me </button>
       <h1>Using reducers</h1>
-      <h2>{final()}</h2>
+      <h3>{final()}</h3>
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  console.log(state.songState[0].name);
   return {
     name: state.songState
   };
 };
 
-export default connect(mapStateToProps)(SongList);
+function matchDispatchToProps(dispatch) {
+  return bindActionCreators({ songAction: songAction }, dispatch);
+}
+export default connect(mapStateToProps, matchDispatchToProps)(SongList);

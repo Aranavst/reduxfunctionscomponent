@@ -1,6 +1,7 @@
-export const songAction = () => {
+export const songAction = (song) => {
+  console.log("action is working fine", song.name);
   return {
     type: "SONG_ACTION",
-    payload: "hi this is payload"
+    payload: song
   };
 };
